@@ -1,50 +1,119 @@
+import java.util.ArrayList;
+
 public class Room {
     private String name;
     private String description;
     private Room north, south, east, west;
+    private ArrayList<Item> items;
+    private ArrayList<Food> food;
+    private ArrayList<Weapon> weapon;
+
 
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
+        this.items = new ArrayList<>();
+        this.food = new ArrayList<>();
     }
 
-    public String getName() {
-        return name;
+// tilføj item til rummet
+    public void addItem(Item item) {
+        items.add(item);
     }
 
-    public String getDescription() {
-        return description;
+// sletter item fra rummet
+    public void removeItem(Item item) {
+        items.remove(item);
     }
 
-    public Room getNorth() {
-        return north;
+// viser items i rummet
+    public ArrayList<Item> getItems() {
+        return items;
     }
 
-    public void setNorth(Room north) {
-        this.north = north;
+    public void addFood(Food food) {
+        this.food.add(food);
     }
 
-    public Room getSouth() {
-        return south;
+    public void removeFood(Food food) {
+        this.food.remove(food);
     }
 
-    public void setSouth(Room south) {
-        this.south = south;
+    public ArrayList<Food> getFood() {
+        return food;
     }
 
-    public Room getEast() {
-        return east;
+    public void addWeapon(Weapon weapon) {
+        this.weapon.add(weapon);
     }
 
-    public void setEast(Room east) {
-        this.east = east;
+    public void removeWeapon(Weapon weapon) {
+        this.weapon.remove(weapon);
     }
 
-    public Room getWest() {
-        return west;
+    public ArrayList<Weapon> getWeapon() {
+        return weapon;
     }
 
-    public void setWest(Room west) {
-        this.west = west;
+    public Food findFood(String name) {
+        for (Food food : food) {
+            if (food.getName().equalsIgnoreCase(name)) {
+                return food;
+            }
+        }
+        return null;
     }
-}
+
+    public Item findItem(String name) {
+        for (Item item : items) {
+            if (item.getName().equalsIgnoreCase(name)) {
+                return item;
+            }
+        }
+
+        return null;
+
+    }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getDescription () {
+            return description;
+        }
+
+        public Room getNorth () {
+            return north;
+        }
+
+        public void setNorth (Room north){
+            this.north = north;
+        }
+
+        public Room getSouth () {
+            return south;
+        }
+
+        public void setSouth (Room south){
+            this.south = south;
+        }
+
+        public Room getEast () {
+            return east;
+        }
+
+        public void setEast (Room east){
+            this.east = east;
+        }
+
+        public Room getWest () {
+            return west;
+        }
+
+        public void setWest (Room west){
+            this.west = west;
+        }
+    }
+
+

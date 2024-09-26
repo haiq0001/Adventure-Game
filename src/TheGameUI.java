@@ -1,0 +1,65 @@
+import java.util.Scanner;
+
+public class TheGameUI {
+    private Scanner scanner = new Scanner(System.in);
+
+    public String getUserInput() {
+        return scanner.nextLine().toLowerCase().trim();
+    }
+
+    public void printWelcomeMessage() {
+        System.out.println("⭐⭐⭐  Welcome to the Adventure Game  ⭐⭐⭐");
+        System.out.println("Type 'help' to see the instructions");
+    }
+
+    public void printHelp() {
+        System.out.println("The instructions:");
+        System.out.println("North/N: Move north");
+        System.out.println("South/S: Move south");
+        System.out.println("East/E: Move east");
+        System.out.println("West/W: Move west");
+        System.out.println("Look: Look around");
+        System.out.println("Take: Take item");
+        System.out.println("Take food: Take food");
+        System.out.println("Eat: Eat the food");
+        System.out.println("Drop: drop item");
+        System.out.println("Inventory: Open inventory");
+        System.out.println("Exit: Exit the game");
+    }
+
+    public void printRoomDescription(Room room) {
+        System.out.println("Your location is: " + room.getName());
+        System.out.println(room.getDescription());
+        if (!room.getItems().isEmpty()) {
+            System.out.print("Items in this room:");
+            for (Item item : room.getItems()) {
+                System.out.println(item.getName());
+            }
+
+            System.out.println();
+        }
+
+        if (!room.getFood().isEmpty()) {
+            System.out.println("Food in this room:");
+            for (Food food : room.getFood()) {
+                System.out.println(food.getName());
+            }
+        }
+    }
+
+    public void printExitMessage() {
+        System.out.println("Thanks for playing!");
+    }
+
+    public void printInvalidCommand() {
+        System.out.println("❌ERROR❌");
+    }
+
+    public void printWrongWayError() {
+        System.out.println("⛔ERROR WRONG WAY⛔");
+    }
+
+    public void printMessage(String message) {
+        System.out.println(message);
+    }
+}
