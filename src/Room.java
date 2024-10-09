@@ -6,7 +6,6 @@ public class Room {
     private Room north, south, east, west;
     private ArrayList<Item> items;
     private ArrayList<Food> food;
-    private ArrayList<Weapon> weapon;
 
 
     public Room(String name, String description) {
@@ -41,18 +40,6 @@ public class Room {
 
     public ArrayList<Food> getFood() {
         return food;
-    }
-
-    public void addWeapon(Weapon weapon) {
-        this.weapon.add(weapon);
-    }
-
-    public void removeWeapon(Weapon weapon) {
-        this.weapon.remove(weapon);
-    }
-
-    public ArrayList<Weapon> getWeapon() {
-        return weapon;
     }
 
     public Food findFood(String name) {
@@ -115,5 +102,3 @@ public class Room {
             this.west = west;
         }
     }
-
-

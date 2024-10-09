@@ -1,17 +1,8 @@
-public class Weapon {
-    private String name;
-
+public abstract class Weapon extends Item {
     public Weapon(String name) {
-        this.name = name;
+        super(name);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void add(Weapon weapon) {
-    }
-
-    public void remove(Weapon weapon) {
-    }
+    public abstract boolean canUse();
+    public abstract void use();
 }

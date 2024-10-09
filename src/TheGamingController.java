@@ -4,8 +4,6 @@ public class TheGamingController {
     private TheGameMap map;
     private TheGameUI ui;
     private String command;
-    private Weapon weapon;
-
 
     public TheGamingController() {
         map = new TheGameMap();
@@ -54,6 +52,14 @@ public class TheGamingController {
 
                 case "take":
                     handleTakeCommmand();
+                    break;
+
+                case "equip":
+                    handleEquipCommand();
+                    break;
+
+                case "attack":
+                    handleAttackCommand();
                     break;
 
                 case "take food":
@@ -138,5 +144,27 @@ public class TheGamingController {
         ui.printMessage("What do you want to eat?");
         String foodName = ui.getUserInput();
         player.eatFood(foodName);
+    }
+
+    private void handleEquipCommand() {
+        ui.printMessage("What weapon do you want to use?");
+        String weaponName = ui.getUserInput();
+        Item item = player.findItemInInventory(weaponName);
+        if (item instanceof Weapon) {
+            player.equipWeapon((Weapon) item);
+            ui.printMessage("You just equipped the " + weaponName);
+        } else {
+            ui.printMessage("Your weapon inventory does not have " + weaponName);
+        }
+    }
+
+    private void handleAttackCommand() {
+        Weapon weapon = player.getEquippedWeapon();
+        if (weapon.canUse()) {
+            ui.printMessage("You attacked with: " + weapon.getName());
+            weapon.use();
+        } else {
+            ui.printMessage("This weapon cannot be used");
+        }
     }
 }

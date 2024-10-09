@@ -4,12 +4,14 @@ public class Player {
     private Room currentRoom;
     private ArrayList<Item> inventory;
     private ArrayList<Food> foodInventory;
-    private ArrayList<Weapon> weapons;
+    private int health;
+    private Weapon equippedWeapon;
 
     public Player(Room startingRoom) {
         this.currentRoom = startingRoom;
         this.inventory = new ArrayList<>();
         this.foodInventory = new ArrayList<>();
+        this.health = 100;
     }
 
     public ArrayList<Item> getInventory() {
@@ -40,10 +42,22 @@ public class Player {
         foodInventory.remove(food);
     }
 
+    public void equipWeapon(Weapon weapon) {
+        this.equippedWeapon = weapon;
+    }
+
+    public Weapon getEquippedWeapon() {
+        return equippedWeapon;
+    }
+
     public void moveTo(Room nextRoom) {
         if (nextRoom != null) {
             currentRoom = nextRoom;
         }
+    }
+
+    public int getHealth() {
+        return health;
     }
 
     public void eatFood(String foodName) {
@@ -57,15 +71,35 @@ public class Player {
         if (foodToEat != null) {
             foodInventory.remove(foodToEat);
             System.out.println("You ate a " + foodToEat.getName());
+            if (foodToEat.isToxic()) {
+                health -= 50;
+                System.out.println("You ate something toxic, you lost 50%. Be carefull!");
+            }
+
+            System.out.println("Health level: " + health + "%");
+            if (health <= 0) {
+                System.out.println("You lost all health, you are DEAD...");
+                System.exit(0);
+            }
         } else {
             System.out.println("Your inventory do not have a " + foodName);
         }
     }
 
+    public Item findItemInInventory(String itemName) {
+        for (Item item : inventory) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                return item;
+            }
+        }
+    return null;
+}
+
+
     // viser inventory
     public void showInventory() {
         if (inventory.isEmpty()) {
-            System.out.println("You to not have any items");
+            System.out.println("You fo not have any items");
         } else {
             System.out.println("Your inventory contains: ");
             for (Item item : inventory) {
@@ -81,10 +115,11 @@ public class Player {
                 System.out.println(food.getName());
             }
         }
+
+        if (getEquippedWeapon() != null) {
+            System.out.println("Equipped weapon: " + equippedWeapon.getName());
+        } else {
+            System.out.println("No weapon is equipped");
+        }
     }
 }
-
-
-
-
-

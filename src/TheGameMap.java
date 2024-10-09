@@ -1,43 +1,47 @@
 public class TheGameMap {
     private Room currentRoom;
     private Food food;
-    private Weapon weapond;
+    private Item item;
+    private Weapon weapon;
 
     public TheGameMap() {
         createRooms();
     }
-    
 
     private void createRooms() {
-        Room room1 = new Room("The Forgotten Courtyard", "Overgrown vines and ancient statues surround the crumbling stone walls");
-        Room room2 = new Room("The Shadowy Crypt", "Cold and damp, with flickering torchlight revealing skeletal remains.");
-        Room room3 = new Room("The Enchanted Forest", "Glowing trees and distant whispers fill the eerie, magical forest.");
-        Room room4 = new Room("The Mystic Library", "Dusty shelves hold ancient, glowing books in the dimly lit room.");
-        Room room5 = new Room("The Sacred Grove", "A peaceful grove with a stone altar, pulsating with magical energy.");
-        Room room6 = new Room("The Witch's Kitchen", "Strange potions brew in cauldrons, and jars of mysterious ingredients line the shelves.");
-        Room room7 = new Room("The Cursed Tower", "Howling wind and cobwebs fill this towering, crumbling structure.");
-        Room room8 = new Room("The Forbidden Chamber", "Heavy doors seal the room, where glowing runes cover the stone walls.");
-        Room room9 = new Room("The Dragon’s Lair", "Scorched walls and deep claw marks hint at a lurking dragon nearby.");
+        Room room1 = new Room("The Forgotten Courtyard", "overgrown vines and ancient statues surround the crumbling stone walls");
+        Room room2 = new Room("The Shadowy Crypt", "cold and damp, with flickering torchlight revealing skeletal remains.");
+        Room room3 = new Room("The Enchanted Forest", "glowing trees and distant whispers fill the eerie, magical forest.");
+        Room room4 = new Room("The Mystic Library", "dusty shelves hold ancient, glowing books in the dimly lit room.");
+        Room room5 = new Room("The Sacred Grove", "a peaceful grove with a stone altar, pulsating with magical energy.");
+        Room room6 = new Room("The Witch's Kitchen", "strange potions brew in cauldrons, and jars of mysterious ingredients line the shelves.");
+        Room room7 = new Room("The Cursed Tower", "howling wind and cobwebs fill this towering, crumbling structure.");
+        Room room8 = new Room("The Forbidden Chamber", "heavy doors seal the room, where glowing runes cover the stone walls.");
+        Room room9 = new Room("The Dragon’s Lair", "scorched walls and deep claw marks hint at a lurking dragon nearby.");
 
-        Food apple   = new Food("Juicy Apple");
-        Food fish    = new Food("Juicy Grilled Fish");
-        Food apple2  = new Food("Deadly Toxic Apple");
-        Food nuggets = new Food("Dragon burger With Dragon Nuggets");
-        Food muffin  = new Food("Wizard's Enchanted Muffin");
-        Food bread   = new Food("Deadly Toxic Bogwater Loaf");
+        Item lamp = new Item("Lamp");
 
-        Weapon pistol = new Weapon("A pistol with 12 bullets");
+        Food apple      = new Food("Juicy Apple", false);
+        Food fish       = new Food("Juicy Grilled Fish", false);
+        Food toxicApple = new Food("Deadly Toxic Apple", true);
+        Food nuggets    = new Food("Dragon burger With Dragon Nuggets", false);
+        Food muffin     = new Food("Wizard's Enchanted Muffin", false);
+        Food toxicBread = new Food("Deadly Toxic Bogwater Loaf", true);
 
+        RangedWeapon pistol = new RangedWeapon("Pistol", 5);
+        MeleeWeapon sword = new MeleeWeapon("Sword");
 
         room1.setEast(room2);
         room1.setSouth(room4);
         room1.addFood(apple);
-        room1.addWeapon(pistol);
+        room1.addItem(lamp);
+        room1.addItem(pistol);
+        room1.addItem(sword);
 
         room2.setWest(room1);
         room2.setEast(room3);
         room2.addFood(fish);
-        room2.addFood(apple2);
+        room2.addFood(toxicApple);
 
         room3.setWest(room2);
         room3.setSouth(room6);
@@ -54,7 +58,7 @@ public class TheGameMap {
 
         room7.setNorth(room4);
         room7.setEast(room8);
-        room7.addFood(bread);
+        room7.addFood(toxicBread);
 
         room8.setNorth(room5);
         room8.setWest(room7);
