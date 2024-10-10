@@ -159,12 +159,46 @@ public class TheGamingController {
     }
 
     private void handleAttackCommand() {
+        System.out.println("What do you want to attack?");
+        String enemyName = ui.getUserInput();
+        Enemy enemy = player.getCurrentRoom().findEnemy(enemyName);
+
         Weapon weapon = player.getEquippedWeapon();
+        if ( weapon == null) {
+            System.out.println("You have not equipped any weapon");
+            return;
+        }
+
+        if (enemy == null) {
+            System.out.println("That enenym is not in the room");
+            if (weapon.canUse()) {
+                weapon.use();
+            } else {
+                System.out.println("You can not use this weapon");
+            }
+            return;
+        }
+
         if (weapon.canUse()) {
-            ui.printMessage("You attacked with: " + weapon.getName());
+            System.out.println("You just attacked " + enemy.getName() + " with your " + weapon.getName());
+            enemy.hit(25);
             weapon.use();
         } else {
-            ui.printMessage("This weapon cannot be used");
+            System.out.println("You can not use this weapon");
+            return;
+        }
+
+        if (enemy.isDefeated()) {
+            player.getCurrentRoom().removeEnemy(enemy);
+            player.getCurrentRoom().addItem(enemy.getWeapon());
+        } else {
+            System.out.println(enemy.getName() + " is attacking you! Be carefull");
+            enemy.attack(player);
+        }
+
+        if (player.getHealth() <= 0) {
+            System.out.println("You got killed");
+            System.exit(0);
         }
     }
 }

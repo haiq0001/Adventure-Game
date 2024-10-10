@@ -56,6 +56,11 @@ public class Player {
         }
     }
 
+    public void reduceHealth(int amount) {
+        health -= amount;
+        System.out.println("You got damaged by " + amount + "%, your health level is now " + health + "%");
+    }
+
     public int getHealth() {
         return health;
     }

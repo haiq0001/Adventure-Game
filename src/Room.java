@@ -6,6 +6,7 @@ public class Room {
     private Room north, south, east, west;
     private ArrayList<Item> items;
     private ArrayList<Food> food;
+    private ArrayList<Enemy> enemies;
 
 
     public Room(String name, String description) {
@@ -13,6 +14,7 @@ public class Room {
         this.description = description;
         this.items = new ArrayList<>();
         this.food = new ArrayList<>();
+        this.enemies = new ArrayList<>();
     }
 
 // tilføj item til rummet
@@ -40,6 +42,27 @@ public class Room {
 
     public ArrayList<Food> getFood() {
         return food;
+    }
+
+    public void addEnemy(Enemy enemy) {
+        this.enemies.add(enemy);
+    }
+
+    public void removeEnemy(Enemy enemy) {
+        this.enemies.remove(enemy);
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public Enemy findEnemy(String name) {
+        for ( Enemy enemy : enemies) {
+            if (enemy.getName().equalsIgnoreCase(name)) {
+                return enemy;
+            }
+        }
+        return null;
     }
 
     public Food findFood(String name) {

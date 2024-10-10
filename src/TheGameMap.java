@@ -31,12 +31,15 @@ public class TheGameMap {
         RangedWeapon pistol = new RangedWeapon("Pistol", 5);
         MeleeWeapon sword = new MeleeWeapon("Sword");
 
+        Enemy monster = new Enemy("Monster, ", "A giant monster, with a giant bloody sword ", 100, new MeleeWeapon("Bloody Sword"));
+
         room1.setEast(room2);
         room1.setSouth(room4);
         room1.addFood(apple);
         room1.addItem(lamp);
         room1.addItem(pistol);
         room1.addItem(sword);
+        room1.addEnemy(monster);
 
         room2.setWest(room1);
         room2.setEast(room3);

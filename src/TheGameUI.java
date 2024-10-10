@@ -24,6 +24,7 @@ public class TheGameUI {
         System.out.println("Drop: Drop item");
         System.out.println("Take food: Take food");
         System.out.println("Equip: Equip weapon");
+        System.out.println("Attack: Attack enemy");
         System.out.println("Eat: Eat the food");
         System.out.println("Exit: Exit the game");
     }
@@ -43,6 +44,13 @@ public class TheGameUI {
             System.out.print("Food in this room: ");
             for (Food food : room.getFood()) {
                 System.out.println(food.getName());
+            }
+        }
+
+        if (!room.getEnemies().isEmpty()) {
+            System.out.print("Enemy in this room: ");
+            for (Enemy enemy : room.getEnemies()) {
+                System.out.println(enemy.getName() + enemy.getDescription() + " Health level: " + enemy.getHealth());
             }
         }
     }
